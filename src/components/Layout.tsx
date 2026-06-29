@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from './AuthProvider';
+import LoginScreens from './LoginScreens';
 import { LayoutDashboard, Users, FileText, Package, BarChart2, Settings, LogOut, Menu, X } from 'lucide-react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const { user, logout, loading } = useAuth();
+  const { user, logoutUser, loading } = useAuth();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -18,9 +19,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // If not logged in, just render children (login page)
+  // If not logged in, just render login screens
   if (!user) {
-    return <>{children}</>;
+    return <LoginScreens />;
   }
 
   const role = user.role || 'worker';
@@ -103,7 +104,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
           <button 
-            onClick={logout}
+            onClick={logoutUser}
             className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 transition-colors"
           >
             <LogOut size={20} />

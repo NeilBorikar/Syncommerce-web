@@ -17,13 +17,19 @@ API.interceptors.request.use((config) => {
 
 export const api = {
   // Auth
-  login: async (data: any) => {
+  registerBusiness: async (data: any) => {
+    const res = await API.post('/auth/business/register', data);
+    return res.data;
+  },
+  loginBusiness: async (data: any) => {
+    const res = await API.post('/auth/business/login', data);
+    return res.data;
+  },
+  loginUser: async (data: any) => {
     const formData = new URLSearchParams();
-    formData.append('username', data.email);
+    formData.append('email', data.email);
     formData.append('password', data.password);
-    const res = await API.post('/auth/login', formData, {
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    });
+    const res = await API.post(`/auth/user/login?email=${data.email}&password=${data.password}`);
     return res.data;
   },
   
