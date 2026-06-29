@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Customer, Employee, InventoryItem, SalesReport } from './types';
 
 const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://syncommerce.onrender.com',
 });
 
 API.interceptors.request.use((config) => {
