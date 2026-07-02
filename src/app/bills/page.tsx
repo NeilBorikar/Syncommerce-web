@@ -28,7 +28,7 @@ export default function BillsPage() {
   const loadBills = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`${BASE}/bills/?business_id=${businessId}`, {
+      const res = await fetch(`${BASE}/bills/${businessId}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       const data = await res.json();
